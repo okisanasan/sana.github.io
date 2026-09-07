@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1600" preserveAspectRatio="xMidYMid slice">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#182d61"/>
+    <stop offset="0.34" stop-color="#334c91"/>
+    <stop offset="0.58" stop-color="#7773a7"/>
+    <stop offset="0.72" stop-color="#5e557f"/>
+    <stop offset="1" stop-color="#15172b"/>
+  </linearGradient>
+  <radialGradient id="mist" cx="50%" cy="63%" r="62%">
+    <stop offset="0" stop-color="#c4b8e1" stop-opacity=".30"/>
+    <stop offset=".55" stop-color="#8b82bd" stop-opacity=".12"/>
+    <stop offset="1" stop-color="#07101f" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="field" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#45466b" stop-opacity=".18"/>
+    <stop offset=".45" stop-color="#202844" stop-opacity=".58"/>
+    <stop offset="1" stop-color="#080d19" stop-opacity=".94"/>
+  </linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+</defs>
+<rect width="1000" height="1600" fill="url(#sky)"/>
+<rect width="1000" height="1600" fill="url(#mist)"/>
+
+<!-- distant soft horizon -->
+<path d="M0 850 C150 810 255 840 365 815 C505 785 620 825 760 790 C855 767 930 785 1000 760 L1000 1600 L0 1600 Z" fill="#30365b" opacity=".34" filter="url(#soft)"/>
+<path d="M0 900 C160 865 280 895 410 870 C590 835 760 875 1000 820 L1000 1600 L0 1600 Z" fill="url(#field)"/>
+
+<!-- stars / lights -->
+<g fill="#fff8d5">
+  <circle cx="90" cy="150" r="2"/><circle cx="178" cy="225" r="3"/><circle cx="310" cy="120" r="2"/>
+  <circle cx="455" cy="260" r="2.5"/><circle cx="570" cy="145" r="3"/><circle cx="700" cy="205" r="2"/>
+  <circle cx="835" cy="125" r="2.5"/><circle cx="930" cy="280" r="3"/><circle cx="120" cy="405" r="2"/>
+  <circle cx="385" cy="370" r="2"/><circle cx="650" cy="410" r="2.5"/><circle cx="870" cy="470" r="2"/>
+</g>
+<g fill="#f5e58d" opacity=".78">
+  <circle cx="70" cy="1010" r="4"/><circle cx="160" cy="1110" r="3"/><circle cx="260" cy="960" r="3"/>
+  <circle cx="350" cy="1180" r="5"/><circle cx="465" cy="1040" r="3"/><circle cx="555" cy="1260" r="4"/>
+  <circle cx="680" cy="1010" r="3"/><circle cx="760" cy="1150" r="5"/><circle cx="880" cy="990" r="3"/>
+  <circle cx="930" cy="1250" r="4"/><circle cx="220" cy="1360" r="4"/><circle cx="720" cy="1390" r="3"/>
+</g>
+<g fill="#fff7cf" opacity=".34" filter="url(#soft)">
+  <circle cx="130" cy="620" r="12"/><circle cx="390" cy="700" r="10"/><circle cx="640" cy="610" r="13"/><circle cx="860" cy="730" r="11"/>
+</g>
+
+<!-- fine grasses -->
+<g stroke="#10182b" stroke-width="2.5" opacity=".68" fill="none" stroke-linecap="round">
+  <path d="M35 1600 Q48 1390 42 1080 M42 1320 Q15 1280 5 1225 M42 1250 Q68 1210 82 1160"/>
+  <path d="M105 1600 Q120 1370 112 1050 M112 1320 Q85 1270 70 1220 M112 1240 Q142 1190 155 1135"/>
+  <path d="M190 1600 Q215 1350 205 980 M205 1290 Q175 1240 160 1180 M205 1190 Q238 1140 248 1075"/>
+  <path d="M295 1600 Q315 1370 308 1100 M308 1320 Q280 1280 265 1225 M308 1240 Q338 1195 350 1140"/>
+  <path d="M405 1600 Q425 1320 415 930 M415 1240 Q385 1190 370 1130 M415 1150 Q448 1100 460 1035"/>
+  <path d="M520 1600 Q540 1350 530 1040 M530 1300 Q500 1250 485 1190 M530 1200 Q560 1150 575 1085"/>
+  <path d="M635 1600 Q655 1340 645 960 M645 1260 Q615 1210 600 1150 M645 1160 Q675 1110 690 1040"/>
+  <path d="M755 1600 Q775 1370 765 1030 M765 1300 Q735 1250 720 1190 M765 1210 Q795 1160 810 1095"/>
+  <path d="M875 1600 Q895 1350 885 970 M885 1260 Q855 1210 840 1150 M885 1160 Q915 1110 930 1045"/>
+  <path d="M970 1600 Q985 1390 978 1110 M978 1320 Q950 1280 940 1230"/>
+</g>
+
+<!-- delicate flowers -->
+<g stroke="#18213a" stroke-width="2" opacity=".72">
+  <path d="M145 1600 Q150 1430 145 1300" fill="none"/>
+  <path d="M145 1410 L120 1380 M146 1460 L172 1425" fill="none"/>
+  <circle cx="145" cy="1290" r="8" fill="#b7a7cf" stroke="none"/>
+  <circle cx="133" cy="1290" r="5" fill="#e6d9ec" stroke="none"/>
+  <circle cx="157" cy="1290" r="5" fill="#e6d9ec" stroke="none"/>
+  <circle cx="145" cy="1278" r="5" fill="#e6d9ec" stroke="none"/>
+  <circle cx="145" cy="1302" r="5" fill="#e6d9ec" stroke="none"/>
+
+  <path d="M820 1600 Q825 1450 820 1325" fill="none"/>
+  <circle cx="820" cy="1315" r="10" fill="#c2aedb" stroke="none"/>
+  <circle cx="806" cy="1315" r="6" fill="#f0d9ee" stroke="none"/>
+  <circle cx="834" cy="1315" r="6" fill="#f0d9ee" stroke="none"/>
+  <circle cx="820" cy="1301" r="6" fill="#f0d9ee" stroke="none"/>
+  <circle cx="820" cy="1329" r="6" fill="#f0d9ee" stroke="none"/>
+</g>
+</svg>
