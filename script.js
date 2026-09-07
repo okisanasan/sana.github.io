@@ -2,7 +2,7 @@ const toggle = document.querySelector('.chapters-toggle');
 const nav = document.querySelector('.chapter-nav');
 const main = document.querySelector('main');
 
-const chapters = Array.from({ length: 12 }, (_, i) => String(i + 1));
+const chapters = Array.from({ length: 14 }, (_, i) => String(i + 1));
 
 function closeNav() {
   nav.classList.remove('open');
@@ -12,14 +12,11 @@ function closeNav() {
 }
 
 async function openChapters() {
-  // Remove every old chapter after Chapter 1, including wrappers
-  // that contain the former placeholder text.
   main.querySelectorAll('.chapter:not(#chapter-1), .interlude').forEach(el => el.remove());
 
   const chapter1 = document.querySelector('#chapter-1');
   if (!chapter1) return;
 
-  // Chapter numbers are Arabic throughout the book.
   const firstNumber = chapter1.querySelector('.chapter-number');
   if (firstNumber) firstNumber.textContent = '1';
 
@@ -27,7 +24,7 @@ async function openChapters() {
 
   for (const number of chapters.slice(1)) {
     try {
-      const response = await fetch(`chapter-${number}.html?v=2`, { cache: 'no-store' });
+      const response = await fetch(`chapter-${number}.html?v=3`, { cache: 'no-store' });
       if (!response.ok) {
         console.warn(`Глава ${number} не найдена: ${response.status}`);
         continue;
@@ -37,7 +34,6 @@ async function openChapters() {
       const template = document.createElement('template');
       template.innerHTML = html.trim();
       const section = template.content.firstElementChild;
-
       if (!section) continue;
 
       const chapterNumber = section.querySelector('.chapter-number');
@@ -50,7 +46,6 @@ async function openChapters() {
     }
   }
 
-  // Rebuild the table of contents with Arabic numbers.
   nav.querySelectorAll('a').forEach(link => link.remove());
   chapters.forEach(number => {
     const link = document.createElement('a');
@@ -70,5 +65,4 @@ toggle.addEventListener('click', async () => {
   if (open) await openChapters();
 });
 
-// Load the real chapters immediately.
 openChapters();
