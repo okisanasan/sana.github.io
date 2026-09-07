@@ -12,8 +12,10 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
+  position: relative;
+  z-index: 0;
   margin: 0;
-  background: var(--bg);
+  background: #0b1020;
   color: var(--text);
   font-family: var(--serif);
   font-weight: 400;
@@ -22,19 +24,14 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(5,8,18,.16), rgba(5,8,18,.28)),
-    url("site-bg.jpg?v=1") center center / cover no-repeat;
-}
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: linear-gradient(180deg, rgba(5,8,18,.06), rgba(5,8,18,.20));
+  background-image:
+    linear-gradient(180deg, rgba(7,10,24,.12), rgba(7,9,20,.34)),
+    url("background.jpg?v=6");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .grain {
   pointer-events:none;
@@ -87,7 +84,6 @@ footer { border-top:1px solid var(--line); padding:34px; display:flex; justify-c
 .chapter-nav a:hover { color:var(--text); }
 .nav-title { font-size:8px; writing-mode:vertical-rl; margin-bottom:8px; }
 
-/* Единый размер текста внутри всех глав */
 .real-chapter { min-height:auto; padding-top:15vh; padding-bottom:20vh; }
 .real-chapter .chapter-body { max-width:65ch; font-size:22px; line-height:1.7; color:#ddd9d2; }
 .real-chapter p { margin:0 0 1.25em; max-width:65ch; }
@@ -103,11 +99,13 @@ footer { border-top:1px solid var(--line); padding:34px; display:flex; justify-c
 
 @media (max-width:700px) {
   body::before {
-    background:
-      linear-gradient(180deg, rgba(8,12,30,.10), rgba(8,10,22,.18)),
-      url("site-bg.jpg?v=1") center center / cover no-repeat;
+    background-image:
+      linear-gradient(180deg, rgba(11,18,43,.08), rgba(7,9,20,.30)),
+      url("background.jpg?v=6");
+    background-position:center center;
+    background-size:cover;
+    background-repeat:no-repeat;
   }
-  body::after { background:linear-gradient(180deg, rgba(5,8,18,.04), rgba(5,8,18,.14)); }
   .top { padding:22px 20px; }
   .opening h1 { font-size:29vw; }
   .subtitle { margin:35px 0 45px; }
