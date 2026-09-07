@@ -217,7 +217,7 @@ footer {
 .real-chapter { min-height: auto; padding-top: 15vh; padding-bottom: 20vh; }
 .real-chapter .chapter-body {
   max-width: 44rem;
-  font-size: clamp(19px, 1.55vw, 23px);
+  font-size: clamp(21px, 1.7vw, 25px);
   line-height: 1.72;
   color: #d8d3ca;
 }
@@ -252,7 +252,7 @@ footer {
 @media (max-width: 700px) {
   .real-chapter { padding-top: 15vh; }
   .real-chapter .chapter-body {
-    font-size: 20px;
+    font-size: 22px;
     line-height: 1.72;
   }
 }
