@@ -2,69 +2,63 @@ const toggle = document.querySelector('.chapters-toggle');
 const nav = document.querySelector('.chapter-nav');
 const main = document.querySelector('main');
 
-const chapters = [
-  ['1', '#chapter-1'],
-  ['2', '#chapter-2'],
-  ['3', '#chapter-3'],
-  ['4', '#chapter-4'],
-  ['5', '#chapter-5'],
-  ['6', '#chapter-6'],
-  ['7', '#chapter-7'],
-  ['8', '#chapter-8'],
-  ['9', '#chapter-9'],
-  ['10', '#chapter-10'],
-  ['11', '#chapter-11'],
-  ['12', '#chapter-12']
-];
-
-const chapterFiles = chapters.slice(1).map(([number]) => [number, `chapter-${number}.html`]);
-
-async function openChapters() {
-  // Remove old placeholder/interlude chapters.
-  main.querySelectorAll('.placeholder, .interlude').forEach(el => el.remove());
-
-  // Remove any previously loaded real chapters so the function is safe to rerun.
-  main.querySelectorAll('.real-chapter:not(#chapter-1)').forEach(el => el.remove());
-
-  // Keep the chapters together directly after chapter 1.
-  const chapter1 = document.querySelector('#chapter-1');
-  let anchor = chapter1;
-
-  for (const [, file] of chapterFiles) {
-    try {
-      const response = await fetch(file);
-      if (!response.ok) continue;
-
-      const html = await response.text();
-      const template = document.createElement('template');
-      template.innerHTML = html.trim();
-      const section = template.content.firstElementChild;
-
-      if (section) {
-        anchor.insertAdjacentElement('afterend', section);
-        anchor = section;
-      }
-    } catch (error) {
-      console.warn(`Не удалось загрузить ${file}`, error);
-    }
-  }
-
-  // Rebuild the table of contents with Arabic numbers.
-  nav.querySelectorAll('a').forEach(link => link.remove());
-  chapters.forEach(([number, href]) => {
-    const link = document.createElement('a');
-    link.href = href;
-    link.textContent = number;
-    link.addEventListener('click', closeNav);
-    nav.appendChild(link);
-  });
-}
+const chapters = Array.from({ length: 12 }, (_, i) => String(i + 1));
 
 function closeNav() {
   nav.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
   nav.setAttribute('aria-hidden', 'true');
   toggle.textContent = 'главы';
+}
+
+async function openChapters() {
+  // Remove every old chapter after Chapter 1, including wrappers
+  // that contain the former placeholder text.
+  main.querySelectorAll('.chapter:not(#chapter-1), .interlude').forEach(el => el.remove());
+
+  const chapter1 = document.querySelector('#chapter-1');
+  if (!chapter1) return;
+
+  // Chapter numbers are Arabic throughout the book.
+  const firstNumber = chapter1.querySelector('.chapter-number');
+  if (firstNumber) firstNumber.textContent = '1';
+
+  let anchor = chapter1;
+
+  for (const number of chapters.slice(1)) {
+    try {
+      const response = await fetch(`chapter-${number}.html?v=2`, { cache: 'no-store' });
+      if (!response.ok) {
+        console.warn(`Глава ${number} не найдена: ${response.status}`);
+        continue;
+      }
+
+      const html = await response.text();
+      const template = document.createElement('template');
+      template.innerHTML = html.trim();
+      const section = template.content.firstElementChild;
+
+      if (!section) continue;
+
+      const chapterNumber = section.querySelector('.chapter-number');
+      if (chapterNumber) chapterNumber.textContent = number;
+
+      anchor.insertAdjacentElement('afterend', section);
+      anchor = section;
+    } catch (error) {
+      console.warn(`Не удалось загрузить главу ${number}`, error);
+    }
+  }
+
+  // Rebuild the table of contents with Arabic numbers.
+  nav.querySelectorAll('a').forEach(link => link.remove());
+  chapters.forEach(number => {
+    const link = document.createElement('a');
+    link.href = `#chapter-${number}`;
+    link.textContent = number;
+    link.addEventListener('click', closeNav);
+    nav.appendChild(link);
+  });
 }
 
 toggle.addEventListener('click', async () => {
@@ -76,5 +70,5 @@ toggle.addEventListener('click', async () => {
   if (open) await openChapters();
 });
 
-// Load the real chapters immediately, without waiting for the menu to open.
+// Load the real chapters immediately.
 openChapters();
