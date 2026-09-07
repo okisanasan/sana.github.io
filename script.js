@@ -4,6 +4,17 @@ const main = document.querySelector('main');
 
 const chapters = Array.from({ length: 14 }, (_, i) => String(i + 1));
 
+function buildChapterNav() {
+  nav.querySelectorAll('a').forEach(link => link.remove());
+  chapters.forEach(number => {
+    const link = document.createElement('a');
+    link.href = `#chapter-${number}`;
+    link.textContent = number;
+    link.addEventListener('click', closeNav);
+    nav.appendChild(link);
+  });
+}
+
 function closeNav() {
   nav.classList.remove('open');
   toggle.setAttribute('aria-expanded', 'false');
@@ -24,7 +35,7 @@ async function openChapters() {
 
   for (const number of chapters.slice(1)) {
     try {
-      const response = await fetch(`chapter-${number}.html?v=3`, { cache: 'no-store' });
+      const response = await fetch(`chapter-${number}.html?v=14`, { cache: 'no-store' });
       if (!response.ok) {
         console.warn(`Глава ${number} не найдена: ${response.status}`);
         continue;
@@ -45,16 +56,9 @@ async function openChapters() {
       console.warn(`Не удалось загрузить главу ${number}`, error);
     }
   }
-
-  nav.querySelectorAll('a').forEach(link => link.remove());
-  chapters.forEach(number => {
-    const link = document.createElement('a');
-    link.href = `#chapter-${number}`;
-    link.textContent = number;
-    link.addEventListener('click', closeNav);
-    nav.appendChild(link);
-  });
 }
+
+buildChapterNav();
 
 toggle.addEventListener('click', async () => {
   const open = nav.classList.toggle('open');
