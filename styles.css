@@ -92,12 +92,16 @@ footer { border-top:1px solid var(--line); padding:34px; display:flex; justify-c
 .real-chapter h2 { margin-bottom:4.8rem; }
 
 @media (max-width:700px) {
-  body { background-attachment:scroll; }
+  body {
+    background: #0b1020 url("background-mobile.svg") center top / 100% auto repeat-y;
+    background-attachment: scroll;
+  }
+  body::before { background: rgba(5,8,18,.28); }
   .top { padding:22px 20px; }
   .opening h1 { font-size:29vw; }
   .subtitle { margin:35px 0 45px; }
   .breath { width:85vw; height:85vw; }
-  .chapter { display:block; padding:18vh 26px 15vh; }
+  .chapter { display:block; padding:18vh 26px 15vh; background:rgba(7,10,20,.05); }
   .chapter-number { margin-bottom:28px; }
   .chapter h2 { margin:22px 0 44px; }
   .placeholder { font-size:21px; }
